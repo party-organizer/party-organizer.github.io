@@ -6,9 +6,17 @@ var partyCode = new Vue({
     mounted(){
         console.log("Getting code")
         this.code = GetURLParameter("id");
+
+        axios.get('https://party-organizer-back.herokuapp.com/party', {params:{partyID : this.code}})
+            .then(response => (showPartyData(response)))
         //TODO: show party info here
-    }
+    },
 })
+
+function showPartyData(partyData)
+{
+    console.log(partyData)
+}
 
 function GetURLParameter(sParam)
 {
