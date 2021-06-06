@@ -7,6 +7,6 @@ var partyCode = new Vue({
         console.log("Getting code")
         axios
             .get('https://party-organizer-back.herokuapp.com/new-code')
-            .then(response => (this.code = response))
+            .then(response => (this.code = response.data))
     }
   })
