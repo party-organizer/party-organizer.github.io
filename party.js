@@ -8,14 +8,56 @@ var partyCode = new Vue({
         this.code = GetURLParameter("id");
 
         axios.get('https://party-organizer-back.herokuapp.com/party', {params:{partyID : this.code}})
-            .then(response => (showPartyData(response)))
+            .then(response => (showPartyData(response.data)))
+        
         //TODO: show party info here
     },
+})
+
+Vue.component('party-item', {
+    props: ['info'],
+    template: '<li>{{ info.text }}</li>'
+  })
+  
+
+var addEntry = new Vue({
+    el: '#add-entry',
+    data: {
+      message: 'test'
+    },
+    methods:{
+        addEntry: function(event){
+            console.log("Adding entry: " + this.message)
+            entryList.entries.push({text: this.message})
+            axios.post('https://party-organizer-back.herokuapp.com/party', {partyID : partyCode.code, entries: entryList.entries})
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+        }
+    }
+})
+
+
+var entryList = new Vue({
+    el: '#entry-list',
+    data: {
+        entries: [
+        { text: 'Fry' },
+        { text: 'Zoidberg' },
+        ]
+    }
 })
 
 function showPartyData(partyData)
 {
     console.log(partyData)
+    if(partyData.entries)
+    {
+        partyData.entries.forEach(element => {
+            entryList.entries.push(element)
+        });
+    }
 }
 
 function GetURLParameter(sParam)
