@@ -12,6 +12,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <div w3-include-html="partials/navigation.html"></div> 
@@ -19,15 +20,12 @@
     <div class="main"> 
         <div class="row">
           <div class="column"> 
-            <h1>Welcome to party organizer!</h1>
-            <div id="party-create-button">
-              <button v-on:click="showCreateParty">Create party</button>
-            </div>
+            <p>Your party code: <b id="party-code">{{code}}</b></p>
           </div>
         </div>
       </div>
   </section>
-  <script src="/index.js"></script>
+  <script src="/create.js"></script>
   <script src="includeHTML.js"></script>
   <script>includeHTML();</script>
 </body>
