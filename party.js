@@ -29,7 +29,14 @@ var addEntry = new Vue({
         addEntry: function(event){
             console.log("Adding entry: " + this.message)
             entryList.entries.push({text: this.message})
-            axios.post('https://party-organizer-back.herokuapp.com/party', {partyID : partyCode.code, entries: entryList.entries})
+            console.log(partyCode.code)
+            var entries = []
+            entryList.entries.forEach(element => {
+                entries.push({"text": element.text});
+            });
+            console.log(entries)
+            axios.post('https://party-organizer-back.herokuapp.com/party', 
+            {partyID : partyCode.code, entries: entries})
             .catch(function (error) {
                 // handle error
                 console.log(error);
@@ -42,10 +49,7 @@ var addEntry = new Vue({
 var entryList = new Vue({
     el: '#entry-list',
     data: {
-        entries: [
-        { text: 'Fry' },
-        { text: 'Zoidberg' },
-        ]
+        entries: []
     }
 })
 
