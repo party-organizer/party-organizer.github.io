@@ -7,7 +7,7 @@ var partyCreateButton = new Vue({
         showCreateParty: function(event){
             console.log("Getting code")
             axios.get('https://party-organizer-back.herokuapp.com/new-code')
-                .then(response => (window.open("/create.html" + "?id=" + response.data,"_self")))
+                .then(response => (window.open("/create.html" + "?id=" + response.data.value.COUNT,"_self")))
         }
     }
   })

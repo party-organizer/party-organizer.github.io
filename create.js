@@ -6,6 +6,7 @@ var partyCode = new Vue({
     mounted(){
         console.log("Getting code")
         this.code = GetURLParameter("id");
+        //TODO: show party info here
     }
 })
 
