@@ -1,7 +1,7 @@
 var partyCode = new Vue({
     el: '#party-code',
     data: {
-        code: 'test'
+        code: 'Loading'
     },
     mounted(){
         console.log("Getting code")
