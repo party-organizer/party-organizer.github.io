@@ -15,8 +15,8 @@ var partyCode = new Vue({
 })
 
 Vue.component('party-item', {
-    props: ['info'],
-    template: '<li>{{ info.text }}</li>'
+    props: ['info', 'id'],
+    template: '<li>{{ info.text }} <button id="item-delete-button">Delete item</button></li>'
   })
   
 
@@ -28,11 +28,14 @@ var addEntry = new Vue({
     methods:{
         addEntry: function(event){
             console.log("Adding entry: " + this.message)
-            entryList.entries.push({text: this.message})
-            console.log(partyCode.code)
+            entryList.entries.push({text: this.message, id: entryList.entries.length})
+            console.log(this.message + " " + entryList.entries.length)
             var entries = []
+            var index = 0;
             entryList.entries.forEach(element => {
-                entries.push({"text": element.text});
+                console.log(index)
+                entries.push({"text": element.text, "id": index});
+                index++;
             });
             console.log(entries)
             axios.post('https://party-organizer-back.herokuapp.com/party', 
