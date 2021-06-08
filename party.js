@@ -14,12 +14,6 @@ var partyCode = new Vue({
     },
 })
 
-Vue.component('party-item', {
-    props: ['info', 'id'],
-    template: '<li>{{ info.text }} <button id="item-delete-button">Delete item</button></li>'
-  })
-  
-
 var addEntry = new Vue({
     el: '#add-entry',
     data: {
@@ -48,12 +42,30 @@ var addEntry = new Vue({
     }
 })
 
+Vue.component('party-item', {
+    props: ['info', 'id'],
+    template: '<li>{{ info.text }} <button @click="deleteItem">Delete item</button></li>',
+    methods:{
+        deleteItem: function () {
+            this.$emit('delete-event', this.id)
+          }
+    }
+  })
 
 var entryList = new Vue({
     el: '#entry-list',
     data: {
         entries: []
-    }
+    },
+    methods: {
+        handleDeleteEvent(id){
+            var filtered = this.entries.filter(function(value, index, arr){
+            console.log(value.id) 
+            return value.id != id;
+            });
+            this.entries = filtered; 
+        }
+      }
 })
 
 function showPartyData(partyData)

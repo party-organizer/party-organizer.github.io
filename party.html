@@ -27,6 +27,7 @@
                   v-for="item in entries"
                   v-bind:info="item"
                   v-bind:id="item.id"
+                  @delete-event="handleDeleteEvent"
                 ></party-item>
               </ol>
             </div>
