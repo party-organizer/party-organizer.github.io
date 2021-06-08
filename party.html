@@ -21,6 +21,7 @@
         <div class="row">
           <div class="column"> 
             <p>Your party code: <b id="party-code">{{code}}</b></p>
+            <div id="add-entry"><input v-model="message"><button v-on:click="addEntry">Add to list</button></div>
             <div id="entry-list">
               <ol>
                 <party-item
@@ -31,7 +32,6 @@
                 ></party-item>
               </ol>
             </div>
-            <div id="add-entry"><input v-model="message"><button v-on:click="addEntry">Add to list</button></div>
           </div>
         </div>
       </div>

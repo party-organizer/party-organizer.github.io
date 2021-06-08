@@ -21,17 +21,13 @@ var addEntry = new Vue({
     },
     methods:{
         addEntry: function(event){
-            console.log("Adding entry: " + this.message)
             entryList.entries.push({text: this.message, id: entryList.entries.length})
-            console.log(this.message + " " + entryList.entries.length)
             var entries = []
             var index = 0;
             entryList.entries.forEach(element => {
-                console.log(index)
                 entries.push({"text": element.text, "id": index});
                 index++;
             });
-            console.log(entries)
             axios.post('https://party-organizer-back.herokuapp.com/party', 
             {partyID : partyCode.code, entries: entries})
             .catch(function (error) {
@@ -60,10 +56,21 @@ var entryList = new Vue({
     methods: {
         handleDeleteEvent(id){
             var filtered = this.entries.filter(function(value, index, arr){
-            console.log(value.id) 
             return value.id != id;
             });
             this.entries = filtered; 
+            var entries = []
+            var index = 0;
+            this.entries.forEach(element => {
+                entries.push({"text": element.text, "id": index});
+                index++;
+            });
+            axios.post('https://party-organizer-back.herokuapp.com/party', 
+            {partyID : partyCode.code, entries: entries})
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
         }
       }
 })
