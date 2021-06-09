@@ -39,7 +39,7 @@ var addEntry = new Vue({
 
 Vue.component('party-item', {
     props: ['info', 'id'],
-    template: '<li>{{ info.text }} <button @click="deleteItem">Delete item</button></li>',
+    template: '<li>{{ info.text }} <button id="delete-button" @click="deleteItem">❌</button></li>',
     methods:{
         deleteItem: function () {
             this.$emit('delete-event', this.id)
