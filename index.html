@@ -21,8 +21,14 @@
         <div class="row">
           <div class="column"> 
             <h1>Welcome to party organizer!</h1>
+            <h2>Create a new party</h2>
             <div id="party-create-button">
               <button v-on:click="showCreateParty">Create party</button>
+            </div>
+            <h2>Search for party using ID</h2>
+            <div id="party-finder">
+              <input v-model="partyID" placeholder = "Party ID"><button v-on:click="findParty">Find</button>
+              <p>{{searchResult}}</p>
             </div>
           </div>
         </div>

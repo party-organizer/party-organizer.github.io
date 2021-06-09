@@ -10,14 +10,13 @@ var partyCode = new Vue({
         axios.get('https://party-organizer-back.herokuapp.com/party', {params:{partyID : this.code}})
             .then(response => (showPartyData(response.data)))
         
-        //TODO: show party info here
     },
 })
 
 var addEntry = new Vue({
     el: '#add-entry',
     data: {
-      message: 'test'
+      message: ''
     },
     methods:{
         addEntry: function(event){
