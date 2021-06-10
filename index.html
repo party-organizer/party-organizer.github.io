@@ -15,11 +15,12 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
+  <div id="balloon-container"></div> 
   <div w3-include-html="partials/navigation.html"></div> 
   <section class="container"> 
     <div class="main"> 
         <div class="row">
-          <div class="column"> 
+          <div class="column">
             <h1>Welcome to party organizer!</h1>
             <h2>Create a new party</h2>
             <div id="party-create-button">
@@ -30,10 +31,12 @@
               <input v-model="partyID" placeholder = "Party ID"><button v-on:click="findParty">Find</button>
               <p>{{searchResult}}</p>
             </div>
+            <div id="balloon-container"></div> 
           </div>
         </div>
       </div>
   </section>
+  <script src="balloons.js"></script>
   <script src="/index.js"></script>
   <script src="includeHTML.js"></script>
   <script>includeHTML();</script>
