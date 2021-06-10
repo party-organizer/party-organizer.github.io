@@ -14,6 +14,10 @@ function showPartyData(partyData)
             participantList.entries.push(element)
         });
     }
+    if(partyData.location)
+    {
+        vueMap.location = partyData.location;
+    }
 }
 
 function GetURLParameter(sParam)
