@@ -6,12 +6,12 @@ var partyCode = new Vue({
     mounted(){
         console.log("Getting code")
         this.code = GetURLParameter("id");
-
         axios.get('https://party-organizer-back.herokuapp.com/party', {params:{partyID : this.code}})
             .then(response => (showPartyData(response.data)))
         
     },
 })
+
 
 var addEntry = new Vue({
     el: '#add-entry',
@@ -21,18 +21,7 @@ var addEntry = new Vue({
     methods:{
         addEntry: function(event){
             entryList.entries.push({text: this.message, id: entryList.entries.length})
-            var entries = []
-            var index = 0;
-            entryList.entries.forEach(element => {
-                entries.push({"text": element.text, "id": index});
-                index++;
-            });
-            axios.post('https://party-organizer-back.herokuapp.com/party', 
-            {partyID : partyCode.code, entries: entries})
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
+            updateParty();
         }
     }
 })
@@ -58,44 +47,7 @@ var entryList = new Vue({
             return value.id != id;
             });
             this.entries = filtered; 
-            var entries = []
-            var index = 0;
-            this.entries.forEach(element => {
-                entries.push({"text": element.text, "id": index});
-                index++;
-            });
-            axios.post('https://party-organizer-back.herokuapp.com/party', 
-            {partyID : partyCode.code, entries: entries})
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
+            updateParty();
         }
       }
 })
-
-function showPartyData(partyData)
-{
-    console.log(partyData)
-    if(partyData.entries)
-    {
-        partyData.entries.forEach(element => {
-            entryList.entries.push(element)
-        });
-    }
-}
-
-function GetURLParameter(sParam)
-{
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-    for (var i = 0; i < sURLVariables.length; i++) 
-    {
-        var sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] == sParam) 
-        {
-            console.log(sParameterName[1]);
-            return sParameterName[1];
-        }
-    }
-}

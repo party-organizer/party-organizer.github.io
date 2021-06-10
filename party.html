@@ -17,11 +17,13 @@
 <body>
   <div w3-include-html="partials/navigation.html"></div> 
   <section class="container"> 
-    <div class="main"> 
-        <div class="row">
-          <div class="column"> 
-            <p>Your party code: <b id="party-code">{{code}}</b></p>
-            <div id="add-entry"><input v-model="message" placeholder="Enter information here"><button v-on:click="addEntry">Add to list</button></div>
+      <div class="main"> 
+      <div class="row">
+        <p>Your party code: <b id="party-code">{{code}}</b></p>
+      </div>
+      <div class="row">
+        <div class="column"> 
+            <div id="add-entry"><input v-model="message" placeholder="Enter information here"><button v-on:click="addEntry">Add party info</button></div>
             <div id="entry-list">
               <ul>
                 <party-item
@@ -33,9 +35,24 @@
               </ul>
             </div>
           </div>
+          <div class="column"> 
+            <div id="add-participant"><input v-model="message" placeholder="Enter name here"><button v-on:click="addParticipant">Add participant</button></div>
+            <div id="participant-list">
+              <ul>
+                <party-participant
+                  v-for="item in entries"
+                  v-bind:info="item"
+                  v-bind:id="item.id"
+                  @delete-event="handleDeleteEvent"
+                ></party-participant>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
   </section>
+  <script src="/helperFunctions.js"></script>
+  <script src="/participants.js"></script>
   <script src="/party.js"></script>
   <script src="includeHTML.js"></script>
   <script>includeHTML();</script>
