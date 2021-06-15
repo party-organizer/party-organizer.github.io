@@ -14,9 +14,11 @@ function showPartyData(partyData)
             participantList.entries.push(element)
         });
     }
-    if(partyData.location)
+    if(partyData.coorX)
     {
-        vueMap.location = partyData.location;
+        vueMap.coordinateX = partyData.coorX
+        vueMap.coordinateY = partyData.coorY
+        loadLocation()
     }
 }
 
@@ -50,7 +52,7 @@ function updateParty(){
         index++;
     });
     axios.post('https://party-organizer-back.herokuapp.com/party', 
-    {partyID : partyCode.code, entries: entries, participants: participants})
+    {partyID : partyCode.code, entries: entries, participants: participants, coorX : vueMap.coordinateX, coorY : vueMap.coordinateY})
     .catch(function (error) {
         console.log(error);
     });
