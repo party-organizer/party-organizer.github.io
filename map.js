@@ -39,11 +39,19 @@ function initMap() {
         draggable:true,
         title:"Drag me!"
     });
+    
+    marker.addListener("dragend", () => {
+      console.log("Marker moved")
+      setCoordinates(marker.getPosition().lat(), marker.getPosition().lng())
+    });
+  
   }
 
-  function setCoordinates(){
-    var geocoder = new google.maps.Geocoder()
-    var coordinates = geocoder.geocode({address : vueMap.locationTitle})
+  async function setCoordinates(coordinateX, coordinateY){
+    vueMap.coordinateX = coordinateX;
+    vueMap.coordinateY = coordinateY;
+    await loadLocation()
+    updateParty();
   }
 
   async function changeLocation(){
@@ -57,6 +65,7 @@ function initMap() {
   
   async function loadLocation(){
     var newPosition = await new google.maps.LatLng(vueMap.coordinateX, vueMap.coordinateY)
+    marker.setPosition(newPosition)
     map.setCenter(newPosition)
     marker.position = newPosition
   }
