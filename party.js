@@ -4,11 +4,37 @@ var partyCode = new Vue({
         code: 'Loading'
     },
     mounted(){
-        console.log("Getting code")
+        console.log("Getting party data")
         this.code = GetURLParameter("id");
         axios.get('https://party-organizer-back.herokuapp.com/party', {params:{partyID : this.code}})
             .then(response => (showPartyData(response.data)))
         
+    },
+})
+
+var partyStartTime = new Vue({
+    el: '#start-time',
+    data: {
+        time: ''
+    },
+    watch: {
+        time: function (newValue) {
+            console.log("Updating time");
+            updateParty();
+        }
+    },
+})
+
+var partyEndTime = new Vue({
+    el: '#end-time',
+    data: {
+        time: ''
+    },
+    watch: {
+        time: function (newValue) {
+            console.log("Updating time");
+            updateParty();
+        }
     },
 })
 

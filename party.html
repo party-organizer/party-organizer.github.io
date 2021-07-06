@@ -12,6 +12,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src='https://unpkg.com/v-calendar'></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
@@ -20,7 +21,19 @@
   <section class="container"> 
     <div class="main"> 
       <div class="row">
-        <p>Your party code: <b id="party-code">{{code}}</b></p>
+        <p>Your party code: <b id="party-code">{{code}}</b></p> 
+      </div>
+      <div class="row">
+        <div class="column"> 
+          <div id='start-time'>
+            <v-date-picker mode="dateTime" v-model='time' :columns="$screens({ default: 1, lg: 2 })" is24hr/>
+          </div>
+        </div>
+        <div class="column"> 
+          <div id='end-time'>
+            <v-date-picker mode="dateTime" v-model='time' :columns="$screens({ default: 1, lg: 2 })" is24hr/>
+          </div>
+        </div> 
       </div>
       <div class="row">
         <div class="column"> 

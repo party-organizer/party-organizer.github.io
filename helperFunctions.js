@@ -1,24 +1,32 @@
 
 function showPartyData(partyData)
 {
-    console.log(partyData)
+    console.log(partyData);
     if(partyData.entries)
     {
         partyData.entries.forEach(element => {
-            entryList.entries.push(element)
+            entryList.entries.push(element);
         });
     }
     if(partyData.participants)
     {
         partyData.participants.forEach(element => {
-            participantList.entries.push(element)
+            participantList.entries.push(element);
         });
     }
     if(partyData.coorX)
     {
-        vueMap.coordinateX = partyData.coorX
-        vueMap.coordinateY = partyData.coorY
-        loadLocation()
+        vueMap.coordinateX = partyData.coorX;
+        vueMap.coordinateY = partyData.coorY;
+        loadLocation();
+    }
+    if(partyData.startTime)
+    {
+        partyStartTime.time = partyData.startTime;
+    }
+    if(partyData.endTime)
+    {
+        partyEndTime.time = partyData.endTime;
     }
 }
 
@@ -51,8 +59,12 @@ function updateParty(){
         participants.push({"text": element.text, "id": index});
         index++;
     });
-    axios.post('https://party-organizer-back.herokuapp.com/party', 
-    {partyID : partyCode.code, entries: entries, participants: participants, coorX : vueMap.coordinateX, coorY : vueMap.coordinateY})
+    axios.post('https://party-organizer-back.herokuapp.com/party', {
+        partyID : partyCode.code, 
+        entries: entries, 
+        participants: participants, 
+        coorX : vueMap.coordinateX, coorY : vueMap.coordinateY, 
+        startTime: partyStartTime.time, endTime: partyEndTime.time})
     .catch(function (error) {
         console.log(error);
     });

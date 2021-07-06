@@ -8,6 +8,11 @@
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "party-organizer.github.io"
+		"liveServer.settings.multiRootWorkspaceName": "party-organizer.github.io",
+		"cSpell.words": [
+			"Latlng",
+			"coor",
+			"partydata"
+		]
 	}
 }
